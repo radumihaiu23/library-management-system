@@ -12,4 +12,5 @@ public interface BookService {
     ResponseBookDTO updateBookCopies(Long bookID, int newCopiesAvailable);
     List<ResponseBookDTO> getBooks(String title, String author, String genre);
 
+    void deleteCustomerById(long id);
 }

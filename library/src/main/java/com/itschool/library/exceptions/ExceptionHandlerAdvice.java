@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.Map;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Slf4j
 @ControllerAdvice
@@ -26,6 +27,13 @@ public class ExceptionHandlerAdvice {
         return new ResponseEntity<>(objectToString(Map.of("message", bookNotFoundException.getMessage())), BAD_REQUEST);
     }
 
+    @ExceptionHandler(CustomerDeleteException.class)
+    public ResponseEntity<String> customerDeleteException(CustomerDeleteException customerDeleteException) {
+        return new ResponseEntity<>(objectToString(Map.of("message", customerDeleteException.getMessage())), NOT_FOUND );
+    }
+
+
+
     private String objectToString(Object response) {
         try {
             return objectMapper.writeValueAsString(response);
@@ -34,4 +42,8 @@ public class ExceptionHandlerAdvice {
             return "Internal error";
         }
     }
+
+
+
+
 }
