@@ -4,6 +4,7 @@ import com.itschool.library.models.dtos.CopiesAvailableDTO;
 import com.itschool.library.models.dtos.RequestBookDTO;
 import com.itschool.library.models.dtos.ResponseBookDTO;
 import com.itschool.library.services.BookService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseBookDTO> createBook(@RequestBody RequestBookDTO requestBookDTO) {
+    public ResponseEntity<ResponseBookDTO> createBook(@Valid @RequestBody RequestBookDTO requestBookDTO) {
         return ResponseEntity.ok(bookService.createBook(requestBookDTO));
     }
 
@@ -30,7 +31,7 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ResponseBookDTO>> getBookCopies(
+    public ResponseEntity<List<ResponseBookDTO>> getBook(
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "author", required = false) String author,
             @RequestParam(value = "genre", required = false) String genre) {

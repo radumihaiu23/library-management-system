@@ -1,13 +1,11 @@
 package com.itschool.library.controllers;
 
-import com.itschool.library.services.CustomerServiceImpl;
-import lombok.experimental.Delegate;
+import com.itschool.library.models.dtos.RequestCustomerDTO;
+import com.itschool.library.models.dtos.ResponseCustomerDTO;
+import com.itschool.library.services.CustomerService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/api/customers")
 @RestController
 public class CustomerController {
 
@@ -16,12 +14,8 @@ public class CustomerController {
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
-
-    @Operation(summary = "Delete a customer by id")
-    @DeleteMapping("{id}")
-    public ResponseEntity<ResponseCustomerDTO> deleteCustomerById(@PathVariable Long id) {
-        customerService.deleteCustomerById(id);
-        return ResponseEntity.noContent().build();
+    @PostMapping("/api/customers")
+    public ResponseEntity<ResponseCustomerDTO> createCustomer(@RequestBody RequestCustomerDTO requestCustomerDTO) {
+        return ResponseEntity.ok(customerService.createCustomer(requestCustomerDTO));
     }
-    
 }

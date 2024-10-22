@@ -11,6 +11,4 @@ public interface BookService {
     ResponseBookDTO createBook(RequestBookDTO requestBookDTO);
     ResponseBookDTO updateBookCopies(Long bookID, int newCopiesAvailable);
     List<ResponseBookDTO> getBooks(String title, String author, String genre);
-
-    void deleteCustomerById(long id);
 }

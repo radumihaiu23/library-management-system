@@ -57,15 +57,4 @@ public class BookServiceImpl implements BookService {
                 .map(book -> objectMapper.convertValue(book, ResponseBookDTO.class))
                 .toList();
     }
-
-    @Override
-    public void deleteCustomerById(long id) {
-        //find if customer to be deleted is present in the database
-        cutomerRepository.findById(id).orElseThrow(() -> new CustomerDeleteException("Customer with id " + id + " not found"));
-
-        //proceed with deleting customer by given id
-        customerRepository.deleteById(id);
-        log.info("Customer with id {} was deleted, id", id);
-    }
-
 }
