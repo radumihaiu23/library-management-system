@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RequestMapping("/api/customers")
 @RestController
 public class CustomerController {
 
@@ -17,8 +18,15 @@ public class CustomerController {
     }
 
     @Operation(summary = "Create a new customer")
-    @PostMapping("/api/customers")
+    @PostMapping
     public ResponseEntity<ResponseCustomerDTO> createCustomer(@RequestBody RequestCustomerDTO requestCustomerDTO) {
         return ResponseEntity.ok(customerService.createCustomer(requestCustomerDTO));
+    }
+
+    @Operation(summary = "Delete a customer by id")
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteCustomerById(@PathVariable Long id) {
+        customerService.deleteCustomerById(id);
+        return ResponseEntity.noContent().build();
     }
 }

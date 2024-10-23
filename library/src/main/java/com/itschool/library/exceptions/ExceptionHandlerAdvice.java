@@ -39,8 +39,13 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(objectToString(Map.of("message", customerDuplicateEmailException.getMessage())), BAD_REQUEST);
     }
 
+    @ExceptionHandler(CustomerDeleteException.class)
+    public ResponseEntity<String> customerDeleteException(CustomerDeleteException customerDeleteException) {
+        return new ResponseEntity<>(objectToString(Map.of("message", customerDeleteException.getMessage())), NOT_FOUND);
+    }
+
     @ExceptionHandler(CustomerNotFoundException.class)
-    public ResponseEntity<String> customerDeleteException(CustomerNotFoundException customerNotFoundException) {
+    public ResponseEntity<String> customerNotFoundException(CustomerNotFoundException customerNotFoundException) {
         return new ResponseEntity<>(objectToString(Map.of("message", customerNotFoundException.getMessage())), NOT_FOUND);
     }
 

@@ -1,7 +1,8 @@
 package com.itschool.library.exceptions;
 
-public class CustomerDeleteException {
+public class CustomerDeleteException extends RuntimeException{
 
-    public CustomerDeleteException() {
+    public CustomerDeleteException(String message) {
+        super(message);
     }
 }
